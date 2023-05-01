@@ -144,6 +144,24 @@ Requires: which
 Requires: xerces-c
 Requires: zlib
 
+Conflicts: postgresql
+Conflicts: postgresql-contrib
+Conflicts: postgresql-docs
+Conflicts: postgresql-jdbc
+Conflicts: postgresql-jdbc-javadoc
+Conflicts: postgresql-odbc
+Conflicts: postgresql-plperl
+Conflicts: postgresql-plpython3
+Conflicts: postgresql-pltcl
+Conflicts: postgresql-server
+Conflicts: postgresql-server-devel
+Conflicts: postgresql-static
+Conflicts: postgresql-test
+Conflicts: postgresql-test-rpm-macros
+Conflicts: postgresql-upgrade
+Conflicts: postgresql-odbc-tests
+Conflicts: postgresql-upgrade-devel
+
 ## -------------------------------------------------------------------
 
 Group: Applications/Databases
