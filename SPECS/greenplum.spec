@@ -1,9 +1,7 @@
 ## -------------------------------------------------------------------
 ## This is the Greenplum Database RPM spec file.
-
 ## This spec file and ancillary files are licensed in accordance with
 ## The Apache 2 License.
-
 ## -------------------------------------------------------------------
 
 %{!?debug:%global debug 1}
