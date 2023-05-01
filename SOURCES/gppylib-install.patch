@@ -1,0 +1,241 @@
+diff --git a/gpMgmt/bin/gppylib/Makefile b/gpMgmt/bin/gppylib/Makefile
+index 04972f5345..d976abcc63 100644
+--- a/gpMgmt/bin/gppylib/Makefile
++++ b/gpMgmt/bin/gppylib/Makefile
+@@ -28,20 +28,20 @@ DATA= __init__.py \
+ 	utils.py
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib'
+ 
+ install: installdirs
+ 	for file in $(PROGRAMS); do \
+-		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python/gppylib/'$$file ; \
++		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/'$$file ; \
+ 	done
+ 	for file in $(DATA); do \
+-		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/'$$file ; \
+ 	done
+-	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/mainUtils.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/mainUtils.py'
+ 
+ uninstall:
+ 	for file in $(PROGRAMS) $(DATA); do \
+-		rm -f '$(DESTDIR)$(libdir)/python/gppylib/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/'$$file ; \
+ 	done
+ 
+ clean distclean:
+diff --git a/gpMgmt/bin/gppylib/commands/Makefile b/gpMgmt/bin/gppylib/commands/Makefile
+index df276880fc..6c49db42dd 100644
+--- a/gpMgmt/bin/gppylib/commands/Makefile
++++ b/gpMgmt/bin/gppylib/commands/Makefile
+@@ -6,17 +6,17 @@ include $(top_builddir)/src/Makefile.global
+ DATA= __init__.py dca.py gp.py pg.py unix.py
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/commands'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/commands'
+ 
+ install: installdirs
+-	$(INSTALL_SCRIPT) base.py '$(DESTDIR)$(libdir)/python/gppylib/commands/base.py'
++	$(INSTALL_SCRIPT) base.py '$(DESTDIR)$(libdir)/python3.6/gppylib/commands/base.py'
+ 	for file in $(DATA); do \
+-		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/commands/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/commands/'$$file ; \
+ 	done
+ 
+ uninstall:
+ 	for file in base.py $(DATA); do \
+-		rm -f '$(DESTDIR)$(libdir)/python/gppylib/commands/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/commands/'$$file ; \
+ 	done
+ 
+ clean distclean:
+diff --git a/gpMgmt/bin/gppylib/data/Makefile b/gpMgmt/bin/gppylib/data/Makefile
+index 076e024ef0..0a0d02a7a8 100644
+--- a/gpMgmt/bin/gppylib/data/Makefile
++++ b/gpMgmt/bin/gppylib/data/Makefile
+@@ -11,13 +11,13 @@ $(CATALOG_JSON):
+ all: $(CATALOG_JSON)
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/data'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/data'
+ 
+ install: all installdirs
+-	$(INSTALL_DATA) $(CATALOG_JSON) '$(DESTDIR)$(libdir)/python/gppylib/data/$(CATALOG_JSON)'
++	$(INSTALL_DATA) $(CATALOG_JSON) '$(DESTDIR)$(libdir)/python3.6/gppylib/data/$(CATALOG_JSON)'
+ 
+ uninstall:
+-	rm -f '$(DESTDIR)$(libdir)/python/gppylib/data/$(CATALOG_JSON)' ;
++	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/data/$(CATALOG_JSON)' ;
+ 
+ distclean: clean
+ 	rm -f *.json
+diff --git a/gpMgmt/bin/gppylib/db/Makefile b/gpMgmt/bin/gppylib/db/Makefile
+index 03b2b6ee71..97600018f2 100644
+--- a/gpMgmt/bin/gppylib/db/Makefile
++++ b/gpMgmt/bin/gppylib/db/Makefile
+@@ -6,16 +6,16 @@ include $(top_builddir)/src/Makefile.global
+ DATA= __init__.py catalog.py dbconn.py
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/db'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/db'
+ 
+ install: installdirs
+ 	for file in $(DATA); do \
+-		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/db/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/db/'$$file ; \
+ 	done
+ 
+ uninstall:
+ 	for file in $(DATA); do \
+-		rm -f '$(DESTDIR)$(libdir)/python/gppylib/db/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/db/'$$file ; \
+ 	done
+ 
+ clean distclean:
+diff --git a/gpMgmt/bin/gppylib/gpMgmttest/Makefile b/gpMgmt/bin/gppylib/gpMgmttest/Makefile
+index 779e6aa82e..008c0b2a4c 100644
+--- a/gpMgmt/bin/gppylib/gpMgmttest/Makefile
++++ b/gpMgmt/bin/gppylib/gpMgmttest/Makefile
+@@ -4,13 +4,13 @@ top_builddir = ../../../..
+ include $(top_builddir)/src/Makefile.global
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/gpMgmttest'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/gpMgmttest'
+ 
+ install: installdirs
+-	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python/gppylib/gpMgmttest/__init__.py'
++	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python3.6/gppylib/gpMgmttest/__init__.py'
+ 
+ uninstall:
+-	rm -f '$(DESTDIR)$(libdir)/python/gppylib/gpMgmttest/__init__.py'
++	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/gpMgmttest/__init__.py'
+ 
+ clean distclean:
+ 	rm -f *.pyc
+diff --git a/gpMgmt/bin/gppylib/operations/Makefile b/gpMgmt/bin/gppylib/operations/Makefile
+index 7dea0a4e02..04b8c68d65 100644
+--- a/gpMgmt/bin/gppylib/operations/Makefile
++++ b/gpMgmt/bin/gppylib/operations/Makefile
+@@ -10,19 +10,19 @@ DATA= __init__.py buildMirrorSegments.py deletesystem.py detect_unreachable_host
+ 	unix.py update_pg_hba_on_segments.py utils.py segment_tablespace_locations.py
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/operations'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/operations'
+ 
+ install: installdirs
+ 	for file in $(PROGRAMS); do \
+-		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python/gppylib/operations/'$$file ; \
++		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/operations/'$$file ; \
+ 	done
+ 	for file in $(DATA); do \
+-		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/operations/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/operations/'$$file ; \
+ 	done
+ 
+ uninstall:
+ 	for file in $(PROGRAMS) $(DATA); do \
+-		rm -f '$(DESTDIR)$(libdir)/python/gppylib/operations/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/operations/'$$file ; \
+ 	done
+ 
+ clean distclean:
+diff --git a/gpMgmt/bin/gppylib/programs/Makefile b/gpMgmt/bin/gppylib/programs/Makefile
+index e389e9df3b..f606c5817c 100644
+--- a/gpMgmt/bin/gppylib/programs/Makefile
++++ b/gpMgmt/bin/gppylib/programs/Makefile
+@@ -9,22 +9,22 @@ DATA= __init__.py clsAddMirrors.py clsRecoverSegment.py clsSystemState.py \
+ 	programIoUtils.py clsRecoverSegment_triples.py
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/programs'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/programs'
+ 
+ install: installdirs
+-	$(INSTALL_SCRIPT) gppkg.py '$(DESTDIR)$(libdir)/python/gppylib/programs/gppkg.py'
++	$(INSTALL_SCRIPT) gppkg.py '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/gppkg.py'
+ 	for file in $(DATA); do \
+-		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/programs/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/'$$file ; \
+ 	done
+-	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/gppkg.py'
+-	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsAddMirrors.py'
+-	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsRecoverSegment.py'
+-	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsRecoverSegment_triples.py'
+-	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsSystemState.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/gppkg.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsAddMirrors.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsRecoverSegment.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsRecoverSegment_triples.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsSystemState.py'
+ 
+ uninstall:
+ 	for file in $(PROGRAMS) $(DATA); do \
+-		rm -f '$(DESTDIR)$(libdir)/python/gppylib/programs/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/'$$file ; \
+ 	done
+ 
+ clean distclean:
+diff --git a/gpMgmt/bin/gppylib/system/Makefile b/gpMgmt/bin/gppylib/system/Makefile
+index 227fc779b2..292104b589 100644
+--- a/gpMgmt/bin/gppylib/system/Makefile
++++ b/gpMgmt/bin/gppylib/system/Makefile
+@@ -8,17 +8,17 @@ DATA= __init__.py configurationImplGpdb.py configurationInterface.py environment
+ 	fileSystemInterface.py info.py osImplNative.py osInterface.py
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/system'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/system'
+ 
+ install: installdirs
+-	$(INSTALL_SCRIPT) ComputeCatalogUpdate.py '$(DESTDIR)$(libdir)/python/gppylib/system/ComputeCatalogUpdate.py'
++	$(INSTALL_SCRIPT) ComputeCatalogUpdate.py '$(DESTDIR)$(libdir)/python3.6/gppylib/system/ComputeCatalogUpdate.py'
+ 	for file in $(DATA); do \
+-		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/system/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/system/'$$file ; \
+ 	done
+ 
+ uninstall:
+ 	for file in ComputeCatalogUpdate.py $(DATA); do \
+-		rm -f '$(DESTDIR)$(libdir)/python/gppylib/system/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/system/'$$file ; \
+ 	done
+ 
+ clean distclean:
+diff --git a/gpMgmt/bin/gppylib/util/Makefile b/gpMgmt/bin/gppylib/util/Makefile
+index a73c17bba2..6e6eada697 100644
+--- a/gpMgmt/bin/gppylib/util/Makefile
++++ b/gpMgmt/bin/gppylib/util/Makefile
+@@ -4,17 +4,17 @@ top_builddir = ../../../..
+ include $(top_builddir)/src/Makefile.global
+ 
+ installdirs:
+-	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/util'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/util'
+ 
+ install: installdirs
+-	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python/gppylib/util/__init__.py'
+-	$(INSTALL_DATA) gp_utils.py '$(DESTDIR)$(libdir)/python/gppylib/util/gp_utils.py'
+-	$(INSTALL_DATA) ssh_utils.py '$(DESTDIR)$(libdir)/python/gppylib/util/ssh_utils.py'
++	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python3.6/gppylib/util/__init__.py'
++	$(INSTALL_DATA) gp_utils.py '$(DESTDIR)$(libdir)/python3.6/gppylib/util/gp_utils.py'
++	$(INSTALL_DATA) ssh_utils.py '$(DESTDIR)$(libdir)/python3.6/gppylib/util/ssh_utils.py'
+ 
+ uninstall:
+-	rm -f '$(DESTDIR)$(libdir)/python/gppylib/util/__init__.py'
+-	rm -f '$(DESTDIR)$(libdir)/python/gppylib/util/gp_utils.py'
+-	rm -f '$(DESTDIR)$(libdir)/python/gppylib/util/ssh_utils.py'
++	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/util/__init__.py'
++	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/util/gp_utils.py'
++	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/util/ssh_utils.py'
+ 
+ clean distclean:
+ 	rm -f *.pyc

@@ -1,0 +1,13 @@
+diff --git a/gpMgmt/bin/lib/gp_bash_functions.sh b/gpMgmt/bin/lib/gp_bash_functions.sh
+index 2c013a3333..78c4772066 100755
+--- a/gpMgmt/bin/lib/gp_bash_functions.sh
++++ b/gpMgmt/bin/lib/gp_bash_functions.sh
+@@ -22,7 +22,7 @@ CMDPATH=(/usr/kerberos/bin /usr/sfw/bin /opt/sfw/bin /usr/local/bin /bin /usr/bi
+ 
+ #GPPATH is the list of possible locations for the Greenplum Database binaries, in precedence order
+ declare -a GPPATH
+-GPPATH=( $GPHOME $MPPHOME $BIZHOME )
++GPPATH=( $GPHOME/bin )
+ if [ ${#GPPATH[@]} -eq 0 ];then
+ 	echo "[FATAL]:-GPHOME environment variable is required to run GPDB but could not be found."
+ 	echo "Please set it by sourcing the  greenplum_path.sh  in your GPDB installation directory."
