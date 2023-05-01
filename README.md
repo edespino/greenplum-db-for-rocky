@@ -26,6 +26,7 @@ git diff > gppylib-install.patch
 # Copy dev files to rpmbuild systems
 
 scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SPECS/greenplum.spec            rocky9:/home/eespino/workspace/greenplum-db-for-rocky/SPECS/greenplum.spec
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp.limits.conf          rocky9:/home/eespino/workspace/rpmbuild/SOURCES/gp.limits.conf
 scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gppylib-install.patch   rocky9:/home/eespino/workspace/rpmbuild/SOURCES/gppylib-install.patch
 scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp_bash_functions.patch rocky9:/home/eespino/workspace/rpmbuild/SOURCES/gp_bash_functions.patch
 
@@ -122,8 +123,9 @@ ssh rocky8
 
 sudo dnf install -y greenplum-db-7.0.0-1.el8_GPDev.x86_64.rpm
 sudo dnf --enablerepo=epel install -y greenplum-db-7.0.0-1.el8_GPDev.x86_64.rpm
+sudo dnf --enablerepo=epel install -y postgresql
 
-sudo mkdir -p /data/coordinator /data/primary; sudo chown gpadmin.gpadmin /data/coordinator /data/primary
+sudo mkdir -p /data/coordinator /data/{primary,mirror}; sudo chown gpadmin.gpadmin /data/coordinator /data/{primary,mirror}
 
 sudo usermod -a -G wheel gpadmin
 
@@ -136,22 +138,31 @@ cp /usr/docs/cli_help/gpconfigs/gpinitsystem_config .
 
 # Update gpinitystem file.
 sed -i -e "s|\(^declare -a DATA_DIRECTORY.*\)|declare -a DATA_DIRECTORY=(/data/primary)|" \
+       -e "s|\(^#declare -a MIRROR_DATA_DIRECTORY.*\)|declare -a MIRROR_DATA_DIRECTORY=(/data/mirror)|" \
+       -e "s|^#MIRROR_PORT_BASE=7000|MIRROR_PORT_BASE=7000|" \
        -e "s|\(^#DATABASE_NAME=name_of_database.*$\)|DATABASE_NAME=gpadmin|" \
        -e "s|\(^COORDINATOR_HOSTNAME=.*$\)|COORDINATOR_HOSTNAME=$(hostname)|" $HOME/gpinitsystem_config
 
 ssh-keygen -t rsa -b 4096 -C gpadmin -f $HOME/.ssh/id_rsa -P ""
 cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
 chmod 600 $HOME/.ssh/*
-ssh rocky8 uptime
+ssh -o StrictHostKeyChecking=no rocky8 uptime
 gpinitsystem -c gpinitsystem_config -h hosts -a
 
+# Basic deployment validation commands.
 export COORDINATOR_DATA_DIRECTORY=/data/coordinator/gpseg-1
-
-gpstop -a
-gpstart -a
-gpstate
 
 psql postgres -c 'select version()'
 psql postgres -c 'show optimizer'
 psql postgres -c 'select * from gp_segment_configuration'
+
+gpstate -s
+gpstate -Q
+gpstate -m
+gpstate -f
+gpstate -x
+gpstate -i
+gpstate -e
+gpstop -a
+gpstart -a
 ```
