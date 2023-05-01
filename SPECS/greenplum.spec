@@ -51,6 +51,7 @@ Url: https://github.com/greenplum-db/gpdb
 
 Source0: https://github.com/greenplum-db/gpdb/releases/download/%{version}%{betamajorversion}/%{version}%{betamajorversion}-src-full.tar.gz
 Source1: https://github.com/PyGreSQL/PyGreSQL/releases/download/%{pygresqlversion}/PyGreSQL-%{pygresqlversion}.tar.gz
+Source2: gp.limits.conf
 Patch1: gppylib-install.patch
 Patch2: gp_bash_functions.patch
 
@@ -313,8 +314,11 @@ common_configure_options='
 ## -------------------------------------------------------------------
 
 %install
+
+# Install GPDB
 make install DESTDIR=$RPM_BUILD_ROOT
 
+# Build and Install PyGreSQL
 cd ..; cd PyGreSQL-%{pygresqlversion}
 
 PATH=$RPM_BUILD_ROOT/usr/bin:$PATH \
@@ -329,6 +333,10 @@ find "$RPM_BUILD_ROOT/usr/lib64/python%{python3_version}/site-packages" \
     while read so_file; do
         strip --strip-debug "$so_file"
     done
+
+# Install /etc config file(s)
+install -d $RPM_BUILD_ROOT/etc/security/limits.d
+install -m 644 %{SOURCE2} $RPM_BUILD_ROOT/etc/security/limits.d
 
 ## -------------------------------------------------------------------
 ## PRE section
@@ -351,6 +359,7 @@ getent passwd gpadmin >/dev/null || /usr/sbin/useradd \
 ## -------------------------------------------------------------------
 
 %files
+
 %defattr(-,gpadmin,gpadmin,-)
 %{_prefix}/greenplum_path.sh
 %{_bindir}/*
@@ -373,6 +382,9 @@ getent passwd gpadmin >/dev/null || /usr/sbin/useradd \
 %{_docdir}/postgresql
 %{_datadir}/greenplum
 %{_datadir}/postgresql
+
+%defattr(-,root,root,-)
+%{_sysconfdir}/security/limits.d/gp.limits.conf
 
 ## -------------------------------------------------------------------
 ## CHANGELOGFILES section
