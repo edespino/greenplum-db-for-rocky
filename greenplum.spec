@@ -54,6 +54,7 @@ Source1: https://github.com/PyGreSQL/PyGreSQL/releases/download/%{pygresqlversio
 Source2: gp.limits.conf
 Patch1: gppylib-install.patch
 Patch2: gp_bash_functions.patch
+Patch3: mangling-shebang.patch
 
 ## -------------------------------------------------------------------
 
@@ -182,6 +183,7 @@ performance on large data volumes.
 %setup -q -b 0 -n gpdb_src
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 ## -------------------------------------------------------------------
 ## BUILD section

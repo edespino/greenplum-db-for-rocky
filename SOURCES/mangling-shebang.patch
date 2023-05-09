@@ -1,0 +1,628 @@
+diff --git a/gpMgmt/bin/analyzedb b/gpMgmt/bin/analyzedb
+index a2ad49a7ff..de4a7f0906 100755
+--- a/gpMgmt/bin/analyzedb
++++ b/gpMgmt/bin/analyzedb
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # -*- coding: utf-8 -*-
+ 
+ # Copyright (c) 2015 VMware, Inc. or its affiliates. All Rights Reserved
+diff --git a/gpMgmt/bin/gpactivatestandby b/gpMgmt/bin/gpactivatestandby
+index 88590cb8ba..07a4573877 100755
+--- a/gpMgmt/bin/gpactivatestandby
++++ b/gpMgmt/bin/gpactivatestandby
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # -*- coding: utf-8 -*-
+ # Line too long - pylint: disable=C0301
+ # Invalid name  - pylint: disable=C0103
+diff --git a/gpMgmt/bin/gpaddmirrors b/gpMgmt/bin/gpaddmirrors
+index 6fe0aea959..21dbff8fb2 100755
+--- a/gpMgmt/bin/gpaddmirrors
++++ b/gpMgmt/bin/gpaddmirrors
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Recovers Greenplum segment instances that are marked as invalid, if
+ # mirroring is configured and operational
+diff --git a/gpMgmt/bin/gpcheckcat b/gpMgmt/bin/gpcheckcat
+index e38f02dd3a..c357b8497e 100755
+--- a/gpMgmt/bin/gpcheckcat
++++ b/gpMgmt/bin/gpcheckcat
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ '''
+ Usage: gpcheckcat [<option>] [dbname]
+ 
+diff --git a/gpMgmt/bin/gpcheckcat_modules/foreign_key_check.py b/gpMgmt/bin/gpcheckcat_modules/foreign_key_check.py
+old mode 100644
+new mode 100755
+index b584b9f755..f40d497e31
+--- a/gpMgmt/bin/gpcheckcat_modules/foreign_key_check.py
++++ b/gpMgmt/bin/gpcheckcat_modules/foreign_key_check.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ from gppylib.gplog import *
+ from gppylib.gpcatalog import *
+diff --git a/gpMgmt/bin/gpcheckcat_modules/orphan_toast_table_issues.py b/gpMgmt/bin/gpcheckcat_modules/orphan_toast_table_issues.py
+old mode 100644
+new mode 100755
+index f05d2be7ee..657eba3537
+--- a/gpMgmt/bin/gpcheckcat_modules/orphan_toast_table_issues.py
++++ b/gpMgmt/bin/gpcheckcat_modules/orphan_toast_table_issues.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ 
+ class OrphanToastTableIssue(object):
+diff --git a/gpMgmt/bin/gpcheckcat_modules/orphaned_toast_tables_check.py b/gpMgmt/bin/gpcheckcat_modules/orphaned_toast_tables_check.py
+old mode 100644
+new mode 100755
+index 21ec8d1804..e86b227392
+--- a/gpMgmt/bin/gpcheckcat_modules/orphaned_toast_tables_check.py
++++ b/gpMgmt/bin/gpcheckcat_modules/orphaned_toast_tables_check.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ import itertools
+ 
+diff --git a/gpMgmt/bin/gpcheckcat_modules/repair.py b/gpMgmt/bin/gpcheckcat_modules/repair.py
+old mode 100644
+new mode 100755
+index ee7d713707..021af67bee
+--- a/gpMgmt/bin/gpcheckcat_modules/repair.py
++++ b/gpMgmt/bin/gpcheckcat_modules/repair.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ """
+ Purpose : Creates the repair dir and the corresponding sql/bash scripts for
+           repairing some of the catalog issues(see the list below) reported by gpcheckcat.
+diff --git a/gpMgmt/bin/gpcheckcat_modules/repair_missing_extraneous.py b/gpMgmt/bin/gpcheckcat_modules/repair_missing_extraneous.py
+old mode 100644
+new mode 100755
+index 49eada7c55..f08909dad6
+--- a/gpMgmt/bin/gpcheckcat_modules/repair_missing_extraneous.py
++++ b/gpMgmt/bin/gpcheckcat_modules/repair_missing_extraneous.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ from gppylib.utils import escapeDoubleQuoteInSQLString
+ 
+ class RepairMissingExtraneous:
+diff --git a/gpMgmt/bin/gpcheckcat_modules/unique_index_violation_check.py b/gpMgmt/bin/gpcheckcat_modules/unique_index_violation_check.py
+old mode 100644
+new mode 100755
+index 47999f5c59..1f5a2d5406
+--- a/gpMgmt/bin/gpcheckcat_modules/unique_index_violation_check.py
++++ b/gpMgmt/bin/gpcheckcat_modules/unique_index_violation_check.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ class UniqueIndexViolationCheck:
+     unique_indexes_query = """
+diff --git a/gpMgmt/bin/gpcheckperf b/gpMgmt/bin/gpcheckperf
+index 669b9b9c52..5eaa4808d8 100755
+--- a/gpMgmt/bin/gpcheckperf
++++ b/gpMgmt/bin/gpcheckperf
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ """
+ gpcheckperf -- Check the hardware for Greenplum Database
+ 
+diff --git a/gpMgmt/bin/gpcheckresgroupimpl b/gpMgmt/bin/gpcheckresgroupimpl
+index f74d60d012..31399e5697 100755
+--- a/gpMgmt/bin/gpcheckresgroupimpl
++++ b/gpMgmt/bin/gpcheckresgroupimpl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # Copyright (c) 2017, VMware, Inc. or its affiliates.
+ 
+ import os
+diff --git a/gpMgmt/bin/gpcheckresgroupv2impl b/gpMgmt/bin/gpcheckresgroupv2impl
+index 48503aa863..fad66c6611 100755
+--- a/gpMgmt/bin/gpcheckresgroupv2impl
++++ b/gpMgmt/bin/gpcheckresgroupv2impl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # Copyright (c) 2017, VMware, Inc. or its affiliates.
+ 
+ import os
+diff --git a/gpMgmt/bin/gpconfig b/gpMgmt/bin/gpconfig
+index 1f6a55c387..e572e2a10c 100755
+--- a/gpMgmt/bin/gpconfig
++++ b/gpMgmt/bin/gpconfig
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2009. All Rights Reserved.
+ #
+diff --git a/gpMgmt/bin/gpdeletesystem b/gpMgmt/bin/gpdeletesystem
+index 7a32a47565..b17356bce3 100755
+--- a/gpMgmt/bin/gpdeletesystem
++++ b/gpMgmt/bin/gpdeletesystem
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # -*- coding: utf-8 -*-
+ #
+ # Copyright (c) Greenplum Inc 2010. All Rights Reserved.
+diff --git a/gpMgmt/bin/gpexpand b/gpMgmt/bin/gpexpand
+index 7761e317a4..24468aee9a 100755
+--- a/gpMgmt/bin/gpexpand
++++ b/gpMgmt/bin/gpexpand
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # Line too long            - pylint: disable=C0301
+ # Invalid name             - pylint: disable=C0103
+ #
+diff --git a/gpMgmt/bin/gpinitstandby b/gpMgmt/bin/gpinitstandby
+index 0e499d4bb5..914330792b 100755
+--- a/gpMgmt/bin/gpinitstandby
++++ b/gpMgmt/bin/gpinitstandby
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # -*- coding: utf-8 -*-
+ #
+ # Copyright (c) Greenplum Inc 2010. All Rights Reserved. 
+diff --git a/gpMgmt/bin/gpinitsystem b/gpMgmt/bin/gpinitsystem
+index de2eb5e8da..39b6656791 100755
+--- a/gpMgmt/bin/gpinitsystem
++++ b/gpMgmt/bin/gpinitsystem
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/usr/bin/bash
+ #	Filename:-		gpinitsystem
+ #	Status:-		Released	
+ #	Author:-		L Lonergan/G Coombe	
+diff --git a/gpMgmt/bin/gpload b/gpMgmt/bin/gpload
+index 33a0ec0e9f..6f0d5aaaac 100755
+--- a/gpMgmt/bin/gpload
++++ b/gpMgmt/bin/gpload
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/usr/bin/bash
+ if [ ! -z "$GPHOME" ]; then
+     . $GPHOME/greenplum_path.sh
+ fi
+diff --git a/gpMgmt/bin/gpload.py b/gpMgmt/bin/gpload.py
+index 38f3ec1864..fed65a7673 100755
+--- a/gpMgmt/bin/gpload.py
++++ b/gpMgmt/bin/gpload.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # -*- coding: utf-8 -*-
+ # gpload - load file(s) into Greenplum Database
+ # Copyright Greenplum 2008
+diff --git a/gpMgmt/bin/gplogfilter b/gpMgmt/bin/gplogfilter
+index 693fb7c2f0..0a4a741916 100755
+--- a/gpMgmt/bin/gplogfilter
++++ b/gpMgmt/bin/gplogfilter
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # -*- coding: utf-8 -*-
+ #
+ # gplogfilter [options] [inputfile]...
+diff --git a/gpMgmt/bin/gpmemreport b/gpMgmt/bin/gpmemreport
+index 7e91d0893f..8b0a2d5c30 100755
+--- a/gpMgmt/bin/gpmemreport
++++ b/gpMgmt/bin/gpmemreport
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright 2021 VMware, Inc.
+ # SPDX-License-Identifier: Apache-2.0
+diff --git a/gpMgmt/bin/gpmemwatcher b/gpMgmt/bin/gpmemwatcher
+index 6569015bc0..daaf986673 100755
+--- a/gpMgmt/bin/gpmemwatcher
++++ b/gpMgmt/bin/gpmemwatcher
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright 2021 VMware, Inc.
+ # SPDX-License-Identifier: Apache-2.0
+diff --git a/gpMgmt/bin/gpmovemirrors b/gpMgmt/bin/gpmovemirrors
+index 594a82ef0a..bdc1832cfa 100755
+--- a/gpMgmt/bin/gpmovemirrors
++++ b/gpMgmt/bin/gpmovemirrors
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # Line too long            - pylint: disable=C0301
+ # Invalid name             - pylint: disable=C0103
+ #
+diff --git a/gpMgmt/bin/gppylib/commands/base.py b/gpMgmt/bin/gppylib/commands/base.py
+index c3da5a2aa9..d84794e7dd 100755
+--- a/gpMgmt/bin/gppylib/commands/base.py
++++ b/gpMgmt/bin/gppylib/commands/base.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2008. All Rights Reserved.
+ #
+diff --git a/gpMgmt/bin/gppylib/gparray.py b/gpMgmt/bin/gppylib/gparray.py
+index 9879b72fe2..769079afd0 100755
+--- a/gpMgmt/bin/gppylib/gparray.py
++++ b/gpMgmt/bin/gppylib/gparray.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2008. All Rights Reserved.
+ #
+diff --git a/gpMgmt/bin/gppylib/gpunit b/gpMgmt/bin/gppylib/gpunit
+index 0d15895ec7..597366dba8 100755
+--- a/gpMgmt/bin/gppylib/gpunit
++++ b/gpMgmt/bin/gppylib/gpunit
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ """
+ gpunit is similar to unit2 in python but runs with our GpMgmtTestRunner and GpMgmtTextTestResult.
+diff --git a/gpMgmt/bin/gppylib/operations/initstandby.py b/gpMgmt/bin/gppylib/operations/initstandby.py
+index 5b791de6df..acfe684db1 100755
+--- a/gpMgmt/bin/gppylib/operations/initstandby.py
++++ b/gpMgmt/bin/gppylib/operations/initstandby.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ import os
+ import json
+diff --git a/gpMgmt/bin/gppylib/system/ComputeCatalogUpdate.py b/gpMgmt/bin/gppylib/system/ComputeCatalogUpdate.py
+index 936763eead..371f69db2f 100755
+--- a/gpMgmt/bin/gppylib/system/ComputeCatalogUpdate.py
++++ b/gpMgmt/bin/gppylib/system/ComputeCatalogUpdate.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # Line too long - pylint: disable=C0301
+ # Invalid name  - pylint: disable=C0103
+ 
+diff --git a/gpMgmt/bin/gppylib/unit2 b/gpMgmt/bin/gppylib/unit2
+index 581d88effe..d429d5f303 100755
+--- a/gpMgmt/bin/gppylib/unit2
++++ b/gpMgmt/bin/gppylib/unit2
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ __unittest = True
+ 
+diff --git a/gpMgmt/bin/gprecoverseg b/gpMgmt/bin/gprecoverseg
+index 40a52ef603..46f66cad08 100755
+--- a/gpMgmt/bin/gprecoverseg
++++ b/gpMgmt/bin/gprecoverseg
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ """
+ gprecoverseg
+ 
+diff --git a/gpMgmt/bin/gpreload b/gpMgmt/bin/gpreload
+index 6715e51fd8..82cca02b9a 100755
+--- a/gpMgmt/bin/gpreload
++++ b/gpMgmt/bin/gpreload
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ from gppylib.mainUtils import simple_main
+ from gppylib.operations.reload import GpReload
+diff --git a/gpMgmt/bin/gpsd b/gpMgmt/bin/gpsd
+index 3ad75417a8..9a622f8a5c 100755
+--- a/gpMgmt/bin/gpsd
++++ b/gpMgmt/bin/gpsd
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # Copyright (c) 2014 Pivotal inc.
+ 
+ 
+diff --git a/gpMgmt/bin/gpssh b/gpMgmt/bin/gpssh
+index 7e52ce9729..83a4743989 100755
+--- a/gpMgmt/bin/gpssh
++++ b/gpMgmt/bin/gpssh
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ '''
+ gpssh -- ssh access to multiple hosts at once
+diff --git a/gpMgmt/bin/gpssh-exkeys b/gpMgmt/bin/gpssh-exkeys
+index cf9853360f..563a92f6ed 100755
+--- a/gpMgmt/bin/gpssh-exkeys
++++ b/gpMgmt/bin/gpssh-exkeys
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # -*- indent-tabs-mode: nil; tab-width:4 -*-
+ # vim:set tabstop=4 expandtab:
+ '''
+diff --git a/gpMgmt/bin/gpstart b/gpMgmt/bin/gpstart
+index 08a31bf930..53d7913cd5 100755
+--- a/gpMgmt/bin/gpstart
++++ b/gpMgmt/bin/gpstart
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2008. All Rights Reserved.
+ #
+diff --git a/gpMgmt/bin/gpstate b/gpMgmt/bin/gpstate
+index a3d8e5aedf..1467ab2325 100755
+--- a/gpMgmt/bin/gpstate
++++ b/gpMgmt/bin/gpstate
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Displays system status information
+ #
+diff --git a/gpMgmt/bin/gpstop b/gpMgmt/bin/gpstop
+index 38a43a03dd..e819462b16 100755
+--- a/gpMgmt/bin/gpstop
++++ b/gpMgmt/bin/gpstop
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2008. All Rights Reserved.
+ #
+diff --git a/gpMgmt/bin/gpsync b/gpMgmt/bin/gpsync
+index e656ca97a8..1d61de040d 100755
+--- a/gpMgmt/bin/gpsync
++++ b/gpMgmt/bin/gpsync
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ '''
+ gpsync -- rsync to multiple hosts at once
+diff --git a/gpMgmt/bin/lib/gp_bash_functions.sh b/gpMgmt/bin/lib/gp_bash_functions.sh
+index 2c013a3333..b2c1a17639 100755
+--- a/gpMgmt/bin/lib/gp_bash_functions.sh
++++ b/gpMgmt/bin/lib/gp_bash_functions.sh
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/usr/bin/bash
+ #	Filename:-		gp_bash_functions.sh
+ #	Status:-		Released
+ #	Author:-		G L Coombe (Greenplum)
+diff --git a/gpMgmt/bin/lib/gpconfigurenewsegment b/gpMgmt/bin/lib/gpconfigurenewsegment
+index 3eedf86049..fa569eb761 100755
+--- a/gpMgmt/bin/lib/gpconfigurenewsegment
++++ b/gpMgmt/bin/lib/gpconfigurenewsegment
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ import datetime
+ import sys
+diff --git a/gpMgmt/bin/lib/gpcreateseg.sh b/gpMgmt/bin/lib/gpcreateseg.sh
+index 740338f27a..14b6d222be 100755
+--- a/gpMgmt/bin/lib/gpcreateseg.sh
++++ b/gpMgmt/bin/lib/gpcreateseg.sh
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env bash
++#!/usr/bin/bash
+ #	Filename:-		gpcreateseg.sh
+ #	Version:-		$Revision$
+ #	Updated:-		$Date$	
+diff --git a/gpMgmt/bin/lib/gppinggpfdist.py b/gpMgmt/bin/lib/gppinggpfdist.py
+old mode 100644
+new mode 100755
+index eca394e838..5803b27163
+--- a/gpMgmt/bin/lib/gppinggpfdist.py
++++ b/gpMgmt/bin/lib/gppinggpfdist.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ import sys, http.client, getopt, socket
+ 
+diff --git a/gpMgmt/bin/lib/gpstate.py b/gpMgmt/bin/lib/gpstate.py
+index e5e5745679..f409d8a6d1 100755
+--- a/gpMgmt/bin/lib/gpstate.py
++++ b/gpMgmt/bin/lib/gpstate.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Recovers Greenplum segment instances that are marked as invalid, if
+ # mirroring is configured and operational
+diff --git a/gpMgmt/bin/lib/multidd b/gpMgmt/bin/lib/multidd
+index ea0ffe4254..8b3bbf399d 100755
+--- a/gpMgmt/bin/lib/multidd
++++ b/gpMgmt/bin/lib/multidd
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ """
+ multidd - run multiple dd concurrently to determine disk throughput
+ 
+diff --git a/gpMgmt/bin/minirepro b/gpMgmt/bin/minirepro
+index 41ebbdabdd..5eca7ae762 100755
+--- a/gpMgmt/bin/minirepro
++++ b/gpMgmt/bin/minirepro
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ '''
+ minirepro utility
+ 
+diff --git a/gpMgmt/sbin/gpcleansegmentdir.py b/gpMgmt/sbin/gpcleansegmentdir.py
+index 10c04444bc..ae425e62d4 100755
+--- a/gpMgmt/sbin/gpcleansegmentdir.py
++++ b/gpMgmt/sbin/gpcleansegmentdir.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2010. All Rights Reserved.
+ #
+diff --git a/gpMgmt/sbin/gpconfig_helper.py b/gpMgmt/sbin/gpconfig_helper.py
+index 99da19f1fd..b926386235 100755
+--- a/gpMgmt/sbin/gpconfig_helper.py
++++ b/gpMgmt/sbin/gpconfig_helper.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2009. All Rights Reserved.
+ #
+diff --git a/gpMgmt/sbin/gpgetstatususingtransition.py b/gpMgmt/sbin/gpgetstatususingtransition.py
+index 58b39636f2..16b7b2a349 100755
+--- a/gpMgmt/sbin/gpgetstatususingtransition.py
++++ b/gpMgmt/sbin/gpgetstatususingtransition.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2010. All Rights Reserved. 
+ #
+diff --git a/gpMgmt/sbin/gpoperation.py b/gpMgmt/sbin/gpoperation.py
+index c083de9e72..88007d0ff3 100755
+--- a/gpMgmt/sbin/gpoperation.py
++++ b/gpMgmt/sbin/gpoperation.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ import sys
+ import pickle
+ import traceback
+diff --git a/gpMgmt/sbin/gpsegrecovery.py b/gpMgmt/sbin/gpsegrecovery.py
+old mode 100644
+new mode 100755
+index 563b772670..f9f9b8e283
+--- a/gpMgmt/sbin/gpsegrecovery.py
++++ b/gpMgmt/sbin/gpsegrecovery.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ from gppylib.recoveryinfo import RecoveryErrorType
+ from gppylib.commands.pg import PgBaseBackup, PgRewind
+diff --git a/gpMgmt/sbin/gpsegsetuprecovery.py b/gpMgmt/sbin/gpsegsetuprecovery.py
+old mode 100644
+new mode 100755
+index 34a3507e56..090bbc323b
+--- a/gpMgmt/sbin/gpsegsetuprecovery.py
++++ b/gpMgmt/sbin/gpsegsetuprecovery.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ import os
+ import sys
+ import abc
+diff --git a/gpMgmt/sbin/gpsegstart.py b/gpMgmt/sbin/gpsegstart.py
+index fb58091a4d..5937397219 100755
+--- a/gpMgmt/sbin/gpsegstart.py
++++ b/gpMgmt/sbin/gpsegstart.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # Line too long - pylint: disable=C0301
+ # Invalid name  - pylint: disable=C0103
+ #
+diff --git a/gpMgmt/sbin/gpsegstop.py b/gpMgmt/sbin/gpsegstop.py
+index 1f8332290a..f4a79e1456 100755
+--- a/gpMgmt/sbin/gpsegstop.py
++++ b/gpMgmt/sbin/gpsegstop.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ #
+ # Copyright (c) Greenplum Inc 2008. All Rights Reserved.
+ #
+diff --git a/gpMgmt/sbin/packcore b/gpMgmt/sbin/packcore
+index 704fcb3cab..159f6ee5fa 100755
+--- a/gpMgmt/sbin/packcore
++++ b/gpMgmt/sbin/packcore
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ # Copyright Pivotal 2014
+ 
+ 
+diff --git a/gpMgmt/sbin/seg_update_pg_hba.py b/gpMgmt/sbin/seg_update_pg_hba.py
+index 478df3fc9b..1905fb5236 100755
+--- a/gpMgmt/sbin/seg_update_pg_hba.py
++++ b/gpMgmt/sbin/seg_update_pg_hba.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ import os
+ import re
+ import sys
+diff --git a/gpcontrib/gp_replica_check/gp_replica_check.py b/gpcontrib/gp_replica_check/gp_replica_check.py
+index 230f7a2784..635f80f36e 100755
+--- a/gpcontrib/gp_replica_check/gp_replica_check.py
++++ b/gpcontrib/gp_replica_check/gp_replica_check.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/libexec/platform-python
+ 
+ '''
+ Tool to validate replication consistency between primary and mirror.
+diff --git a/src/test/regress/atmsort.pl b/src/test/regress/atmsort.pl
+index 71222236a2..bb220e6ccf 100755
+--- a/src/test/regress/atmsort.pl
++++ b/src/test/regress/atmsort.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ #
+ # Portions Copyright (c) 2007, 2008, 2009 GreenPlum.  All rights reserved.
+ # Portions Copyright (c) 2012-Present VMware, Inc. or its affiliates.
+diff --git a/src/test/regress/explain.pl b/src/test/regress/explain.pl
+index 5099f5d5bf..e424c8e8f3 100755
+--- a/src/test/regress/explain.pl
++++ b/src/test/regress/explain.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ #
+ # Portions Copyright (c) 2006, 2007, 2008, 2009 Greenplum Inc
+ # Portions Copyright (c) 2012-Present VMware, Inc. or its affiliates.
+diff --git a/src/test/regress/gpdiff.pl b/src/test/regress/gpdiff.pl
+index 19d365aca9..6ab172baba 100755
+--- a/src/test/regress/gpdiff.pl
++++ b/src/test/regress/gpdiff.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ #
+ # Portions Copyright (c) 2007, 2008, 2009 GreenPlum.  All rights reserved.
+ # Portions Copyright (c) 2012-Present VMware, Inc. or its affiliates.
+diff --git a/src/test/regress/gpstringsubs.pl b/src/test/regress/gpstringsubs.pl
+index 67db16fd56..557d8a94ff 100755
+--- a/src/test/regress/gpstringsubs.pl
++++ b/src/test/regress/gpstringsubs.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ #
+ # Portions Copyright (c) 2007-2010 GreenPlum.  All rights reserved.
+ # Portions Copyright (c) 2012-Present VMware, Inc. or its affiliates.
