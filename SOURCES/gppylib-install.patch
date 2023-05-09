@@ -149,10 +149,10 @@ index 7dea0a4e02..04b8c68d65 100644
  
  clean distclean:
 diff --git a/gpMgmt/bin/gppylib/programs/Makefile b/gpMgmt/bin/gppylib/programs/Makefile
-index e389e9df3b..f606c5817c 100644
+index 6f8e74e160..b124234f85 100644
 --- a/gpMgmt/bin/gppylib/programs/Makefile
 +++ b/gpMgmt/bin/gppylib/programs/Makefile
-@@ -9,22 +9,22 @@ DATA= __init__.py clsAddMirrors.py clsRecoverSegment.py clsSystemState.py \
+@@ -9,20 +9,20 @@ DATA= __init__.py clsAddMirrors.py clsRecoverSegment.py clsSystemState.py \
  	programIoUtils.py clsRecoverSegment_triples.py
  
  installdirs:
@@ -160,18 +160,14 @@ index e389e9df3b..f606c5817c 100644
 +	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/programs'
  
  install: installdirs
--	$(INSTALL_SCRIPT) gppkg.py '$(DESTDIR)$(libdir)/python/gppylib/programs/gppkg.py'
-+	$(INSTALL_SCRIPT) gppkg.py '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/gppkg.py'
  	for file in $(DATA); do \
 -		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/programs/'$$file ; \
 +		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/'$$file ; \
  	done
--	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/gppkg.py'
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsAddMirrors.py'
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsRecoverSegment.py'
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsRecoverSegment_triples.py'
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsSystemState.py'
-+	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/gppkg.py'
 +	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsAddMirrors.py'
 +	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsRecoverSegment.py'
 +	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsRecoverSegment_triples.py'
