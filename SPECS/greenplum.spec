@@ -29,7 +29,7 @@
 # no debug infos with:
 %global debug_package %{nil}
 
-%global betamajorversion -beta.2
+%global betamajorversion -beta.3
 
 %global pygresqlversion 5.2.4
 
@@ -391,5 +391,8 @@ getent passwd gpadmin >/dev/null || /usr/sbin/useradd \
 ## -------------------------------------------------------------------
 
 %changelog
+* Tue May 09 2023 Ed Espino <eespino@vmware.com> - 7.0.0-beta.3
+- Greenplum 7.0.0 Beta 3 release.
+
 * Tue Apr 25 2023 Ed Espino <eespino@vmware.com> - 7.0.0-beta.2
 - Greenplum 7.0.0 Beta 2 release.
