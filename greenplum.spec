@@ -183,9 +183,9 @@ performance on large data volumes.
 
 %setup -q -b 1 -n PyGreSQL-%{pygresqlversion}
 %setup -q -b 0 -n gpdb_src
-%patch 1
-%patch 2
-%patch 3
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 ## -------------------------------------------------------------------
 ## BUILD section
