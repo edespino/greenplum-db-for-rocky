@@ -14,7 +14,7 @@
 %{!?libbz2:%global libbz2 1}
 %{!?libcurl:%global libcurl 1}
 %{!?libxml:%global libxml 1}
-%{!?llvmjit:%global llvmjit 1}
+%{!?llvmjit:%global llvmjit 0}
 %{!?mapreduce:%global mapreduce 1}
 %{!?orafce:%global orafce 1}
 %{!?orca:%global orca 1}
@@ -124,7 +124,9 @@ Requires: libuv
 Requires: libxml2
 Requires: libyaml
 Requires: libzstd
+%if %llvmjit
 Requires: llvm-libs
+%endif
 Requires: openldap
 Requires: openssh
 Requires: openssh-clients
@@ -181,9 +183,9 @@ performance on large data volumes.
 
 %setup -q -b 1 -n PyGreSQL-%{pygresqlversion}
 %setup -q -b 0 -n gpdb_src
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%patch 1
+%patch 2
+%patch 3
 
 ## -------------------------------------------------------------------
 ## BUILD section
