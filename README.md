@@ -4,38 +4,45 @@ Source RPM for Rocky envioronments.
 
 ```
 # Setup rpmbuild environment
+# Provision a minimal rocky 9 system
 
 sudo yum update
 sudo yum check-update
+
+# View repo list
 sudo yum repolist all --enabled
 sudo yum repolist all --disabled
 
+# Add Greenplum builder account
 adduser gpbuilder
 sudo usermod -a -G wheel gpbuilder
 
+# Add supporting rpmbuild tools
 sudo dnf install -y epel-release yum-utils git
 sudo yum-config-manager --disable epel
 sudo dnf install -y rpm-build wget curl rpmdevtools rpmlint
 sudo dnf --enablerepo=epel install -d0 -y mock-core-configs
 sudo usermod -a -G mock gpbuilder
 
-# Generate diffs
-
+# Generate patch file example
 git diff > gppylib-install.patch
 
 # Copy dev files to rpmbuild systems
+# Example commands
 
-scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SPECS/greenplum.spec            rocky9:/home/eespino/workspace/greenplum-db-for-rocky/SPECS/greenplum.spec
-scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp.limits.conf          rocky9:/home/eespino/workspace/rpmbuild/SOURCES/gp.limits.conf
-scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gppylib-install.patch   rocky9:/home/eespino/workspace/rpmbuild/SOURCES/gppylib-install.patch
-scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp_bash_functions.patch rocky9:/home/eespino/workspace/rpmbuild/SOURCES/gp_bash_functions.patch
+# rocky 9 - rpmbuild mock environment
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SPECS/greenplum.spec            rocky9:workspace/greenplum-db-for-rocky/SPECS/greenplum.spec
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp.limits.conf          rocky9:workspace/rpmbuild/SOURCES/gp.limits.conf
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gppylib-install.patch   rocky9:workspace/rpmbuild/SOURCES/gppylib-install.patch
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp_bash_functions.patch rocky9:workspace/rpmbuild/SOURCES/gp_bash_functions.patch
 
-scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SPECS/greenplum.spec            rpmbuild8:/home/eespino/workspace/greenplum-db-for-rocky/SPECS/greenplum.spec
-scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gppylib-install.patch   rpmbuild8:/home/eespino/workspace/rpmbuild/SOURCES/gppylib-install.patch
-scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp_bash_functions.patch rpmbuild8:/home/eespino/workspace/rpmbuild/SOURCES/gp_bash_functions.patch
+# rocky 8 - rpmbuild non-mock environment
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp.limits.conf          rpmbuild8:workspace/rpmbuild/SOURCES/gp.limits.conf
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SPECS/greenplum.spec            rpmbuild8:workspace/greenplum-db-for-rocky/SPECS/greenplum.spec
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gppylib-install.patch   rpmbuild8:workspace/rpmbuild/SOURCES/gppylib-install.patch
+scp $HOME/workspace/rockylinux/greenplum-db-for-rocky/SOURCES/gp_bash_functions.patch rpmbuild8:workspace/rpmbuild/SOURCES/gp_bash_functions.patch
 
 # Setup rpmbuild environment
-
 ssh rocky9
 
 echo "%_topdir $HOME/workspace/rpmbuild" > $HOME/.rpmmacros
@@ -43,20 +50,41 @@ rpmdev-setuptree
 
 # Clone Greenplum spec files
 
-mkdir -p $HOME/workspace
 cd $HOME/workspace
 git clone https://github.com/edespino/greenplum-db-for-rocky.git
 
 cd $HOME/workspace/rpmbuild
-ln -s $HOME/workspace/greenplum-db-for-rocky/SPECS/greenplum.spec $HOME/workspace/rpmbuild/SPECS/greenplum.spec
+ln -s $HOME/workspace/greenplum-db-for-rocky/greenplum.spec $HOME/workspace/rpmbuild/SPECS/greenplum.spec
 
 # Retrieve Greenplum 7.0.0 Beta 2 source tarball
 
-wget https://github.com/greenplum-db/gpdb/releases/download/7.0.0-beta.2/7.0.0-beta.2-src-full.tar.gz \
-     -O $HOME/workspace/rpmbuild/SOURCES/7.0.0-beta.2-src-full.tar.gz
+wget https://github.com/greenplum-db/gpdb/releases/download/7.0.0-beta.3/7.0.0-beta.3-src-full.tar.gz \
+     -O $HOME/workspace/rpmbuild/SOURCES/7.0.0-beta.3-src-full.tar.gz
 
 wget https://github.com/PyGreSQL/PyGreSQL/releases/download/5.2.4/PyGreSQL-5.2.4.tar.gz \
      -O $HOME/workspace/rpmbuild/SOURCES/PyGreSQL-5.2.4.tar.gz
+
+cp -v $HOME/workspace/greenplum-db-for-rocky/*.patch $HOME/workspace/greenplum-db-for-rocky/*.gz $HOME/workspace/rpmbuild/SOURCES
+
+# Cleanup
+rm -rf $HOME/workspace/rpmbuild/BUILD/*
+
+# Run rpmlint against spec file
+rpmlint $HOME/workspace/rpmbuild/SPECS/greenplum.spec
+
+# Create Greenplum Source RPM package ($HOME/workspace/rpmbuild/SRPMS/greenplum-db-7.0.0-1.el8.src.rpm)
+# from spec file ($HOME/workspace/rpmbuild/SPECS/greenplum.spec)
+
+rpmbuild -bs \
+         --define 'dist .el8' \
+         --define "_topdir $HOME/workspace/rpmbuild" \
+         $HOME/workspace/rpmbuild/SPECS/greenplum.spec
+
+mock --verbose \
+     --root $HOME/workspace/greenplum-db-for-rocky/mock/rocky8-x86_64.cfg \
+     --resultdir $HOME/workspace/rpmbuild/BUILD \
+     --isolation simple \
+     $HOME/workspace/rpmbuild/SRPMS/greenplum-db-7.0.0-1.el8.src.rpm
 
 # rpmbuild GPDB Rocky 8 Build Requirements
 
@@ -89,8 +117,6 @@ sudo dnf --enablerepo=epel install -d0 -y xerces-c-devel
 # Create Greenplum Source RPM package ($HOME/workspace/rpmbuild/SRPMS/greenplum-db-7.0.0-1.el8.src.rpm)
 # from spec file ($HOME/workspace/rpmbuild/SPECS/greenplum.spec)
 
-rm -rf $HOME/workspace/rpmbuild/BUILD/*
-rpmlint $HOME/workspace/rpmbuild/SPECS/greenplum.spec
 rpmbuild -bs \
          --define 'dist .el8' \
          --define "_topdir $HOME/workspace/rpmbuild" \
@@ -105,14 +131,6 @@ rpmbuild -ba \
 
 sudo yum erase -y greenplum-db
 sudo yum install -y /home/eespino/workspace/rpmbuild/RPMS/x86_64/greenplum-db-7.0.0-1.el8.x86_64.rpm
-
-# Perform RPM build using mock (https://github.com/rpm-software-management/mock)
-
-mock --verbose \
-     --root $HOME/workspace/greenplum-db-for-rocky/mock/rocky8-x86_64.cfg \
-     --resultdir $HOME/workspace/rpmbuild/BUILD \
-     --isolation simple \
-     $HOME/workspace/rpmbuild/SRPMS/greenplum-db-7.0.0-1.el8.src.rpm
 
 # Copy Greenplum binary rpm to Rocky 8 system
 scp $HOME/workspace/rpmbuild/BUILD/greenplum-db-7.0.0-1.el8_GPDev.x86_64.rpm rocky8:
@@ -165,4 +183,19 @@ gpstate -i
 gpstate -e
 gpstop -a
 gpstart -a
+
+sudo dnf --enablerepo=epel install -d0 tito
+sudo usermod -a -G mock gpbuilder
+
 ```
+
+
+
+
+gcc -Wall -Wmissing-prototypes -Wpointer-arith -Werror=vla -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -Wno-unused-but-set-variable -Werror=implicit-fallthrough=3 -Wno-format-truncation -Wno-stringop-truncation -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection  -Werror=uninitialized -Werror=implicit-function-declaration  -Wno-deprecated-declarations -fPIC -D__STDC_LIMIT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_CONSTANT_MACROS -D_GNU_SOURCE -I/usr/include  -I../../../../src/include   -D_GNU_SOURCE -I/usr/include/libxml2   -c -o llvmjit.o llvmjit.c
+
+gcc -Wall -Wmissing-prototypes -Wpointer-arith -Werror=vla -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -Wno-unused-but-set-variable -Werror=implicit-fallthrough=3 -Wno-format-truncation -Wno-stringop-truncation -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection  -Werror=uninitialized -Werror=implicit-function-declaration  -Wno-deprecated-declarations -fPIC -D__STDC_LIMIT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_CONSTANT_MACROS -D_GNU_SOURCE -I/usr/include  -I../../../../src/include   -D_GNU_SOURCE -I/usr/include/libxml2   -c -o llvmjit.o llvmjit.c
+gcc -Wall -Wmissing-prototypes -Wpointer-arith -Werror=vla -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -Wno-unused-but-set-variable -Werror=implicit-fallthrough=3 -Wno-format-truncation -Wno-stringop-truncation -g -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection  -Werror=uninitialized -Werror=implicit-function-declaration  -Wno-deprecated-declarations -fPIC -D__STDC_LIMIT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_CONSTANT_MACROS -D_GNU_SOURCE -I/usr/include  -I../../../../src/include   -D_GNU_SOURCE -I/usr/include/libxml2   -c -o llvmjit.o llvmjit.c
+
++ CFLAGS='-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection'
++ CFLAGS='-O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection'
