@@ -29,7 +29,7 @@
 # no debug infos with:
 %global debug_package %{nil}
 
-%global betamajorversion -beta.3
+%global betamajorversion beta.3
 
 %global pygresqlversion 5.2.4
 
@@ -39,7 +39,7 @@ Summary: Greenplum Database Server
 Name: greenplum-db
 %global majorversion 7.0.0
 Version: %{majorversion}
-Release: 1%{?dist}
+Release: %{betamajorversion}%{?dist}
 
 ## -------------------------------------------------------------------
 
@@ -48,8 +48,7 @@ Url: https://github.com/greenplum-db/gpdb
 
 ## -------------------------------------------------------------------
 
-
-Source0: https://github.com/greenplum-db/gpdb/releases/download/%{version}%{betamajorversion}/%{version}%{betamajorversion}-src-full.tar.gz
+Source0: https://github.com/greenplum-db/gpdb/releases/download/%{version}-%{betamajorversion}/%{version}-%{betamajorversion}-src-full.tar.gz
 Source1: https://github.com/PyGreSQL/PyGreSQL/releases/download/%{pygresqlversion}/PyGreSQL-%{pygresqlversion}.tar.gz
 Source2: gp.limits.conf
 Patch1: gppylib-install.patch
