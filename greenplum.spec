@@ -137,6 +137,7 @@ Requires: pkgconf-pkg-config
 Requires: python3
 Requires: python3-devel
 Requires: python3-psutil
+Requires: python3-pyyaml
 Requires: readline
 Requires: rsync
 Requires: sed
