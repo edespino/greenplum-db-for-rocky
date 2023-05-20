@@ -104,6 +104,9 @@ BuildRequires: pam-devel
 %endif
 
 BuildRequires: perl(ExtUtils::Embed), perl-devel
+%if 0%{?rhel} >= 9
+BuildRequires: perl-FindBin
+%endif
 BuildRequires: python3-devel
 
 Requires: apr
