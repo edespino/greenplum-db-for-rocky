@@ -33,10 +33,6 @@
 
 %global pygresqlversion 5.2.4
 
-%if 0%{?rhel} >= 9
-%global _lto_cflags %{nil}
-%endif
-
 ## -------------------------------------------------------------------
 
 Summary: Greenplum Database Server
@@ -58,7 +54,8 @@ Source2: gp.limits.conf
 Patch1: gppylib-install.patch
 Patch2: gp_bash_functions.patch
 Patch3: mangling-shebang.patch
-Patch4: SparseData.patch
+Patch4: nbtdesc-initialize-blkno-datalen.patch
+Patch5: SparseData-initialize-num.patch
 
 ## -------------------------------------------------------------------
 
@@ -196,6 +193,7 @@ performance on large data volumes.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 ## -------------------------------------------------------------------
 ## BUILD section
