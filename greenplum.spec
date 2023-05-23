@@ -328,7 +328,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 ## BUILD PyGreSQL section
 ## -------------------------------------------------------------------
 
-# Build and Install PyGreSQL
+cd ..; cd PyGreSQL-%{pygresqlversion}
 
 PATH=$RPM_BUILD_ROOT/usr/bin:$PATH \
 %{python3} setup.py build

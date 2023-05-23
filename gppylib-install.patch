@@ -7,24 +7,24 @@ index 04972f5345..d976abcc63 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib'
  
  install: installdirs
  	for file in $(PROGRAMS); do \
 -		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python/gppylib/'$$file ; \
-+		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/'$$file ; \
++		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python3.9/gppylib/'$$file ; \
  	done
  	for file in $(DATA); do \
 -		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/'$$file ; \
-+		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.9/gppylib/'$$file ; \
  	done
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/mainUtils.py'
-+	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/mainUtils.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.9/gppylib/mainUtils.py'
  
  uninstall:
  	for file in $(PROGRAMS) $(DATA); do \
 -		rm -f '$(DESTDIR)$(libdir)/python/gppylib/'$$file ; \
-+		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/'$$file ; \
  	done
  
  clean distclean:
@@ -37,20 +37,20 @@ index df276880fc..6c49db42dd 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/commands'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/commands'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib/commands'
  
  install: installdirs
 -	$(INSTALL_SCRIPT) base.py '$(DESTDIR)$(libdir)/python/gppylib/commands/base.py'
-+	$(INSTALL_SCRIPT) base.py '$(DESTDIR)$(libdir)/python3.6/gppylib/commands/base.py'
++	$(INSTALL_SCRIPT) base.py '$(DESTDIR)$(libdir)/python3.9/gppylib/commands/base.py'
  	for file in $(DATA); do \
 -		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/commands/'$$file ; \
-+		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/commands/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.9/gppylib/commands/'$$file ; \
  	done
  
  uninstall:
  	for file in base.py $(DATA); do \
 -		rm -f '$(DESTDIR)$(libdir)/python/gppylib/commands/'$$file ; \
-+		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/commands/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/commands/'$$file ; \
  	done
  
  clean distclean:
@@ -63,15 +63,15 @@ index 076e024ef0..0a0d02a7a8 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/data'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/data'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib/data'
  
  install: all installdirs
 -	$(INSTALL_DATA) $(CATALOG_JSON) '$(DESTDIR)$(libdir)/python/gppylib/data/$(CATALOG_JSON)'
-+	$(INSTALL_DATA) $(CATALOG_JSON) '$(DESTDIR)$(libdir)/python3.6/gppylib/data/$(CATALOG_JSON)'
++	$(INSTALL_DATA) $(CATALOG_JSON) '$(DESTDIR)$(libdir)/python3.9/gppylib/data/$(CATALOG_JSON)'
  
  uninstall:
 -	rm -f '$(DESTDIR)$(libdir)/python/gppylib/data/$(CATALOG_JSON)' ;
-+	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/data/$(CATALOG_JSON)' ;
++	rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/data/$(CATALOG_JSON)' ;
  
  distclean: clean
  	rm -f *.json
@@ -84,18 +84,18 @@ index 03b2b6ee71..97600018f2 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/db'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/db'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib/db'
  
  install: installdirs
  	for file in $(DATA); do \
 -		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/db/'$$file ; \
-+		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/db/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.9/gppylib/db/'$$file ; \
  	done
  
  uninstall:
  	for file in $(DATA); do \
 -		rm -f '$(DESTDIR)$(libdir)/python/gppylib/db/'$$file ; \
-+		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/db/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/db/'$$file ; \
  	done
  
  clean distclean:
@@ -108,15 +108,15 @@ index 779e6aa82e..008c0b2a4c 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/gpMgmttest'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/gpMgmttest'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib/gpMgmttest'
  
  install: installdirs
 -	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python/gppylib/gpMgmttest/__init__.py'
-+	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python3.6/gppylib/gpMgmttest/__init__.py'
++	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python3.9/gppylib/gpMgmttest/__init__.py'
  
  uninstall:
 -	rm -f '$(DESTDIR)$(libdir)/python/gppylib/gpMgmttest/__init__.py'
-+	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/gpMgmttest/__init__.py'
++	rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/gpMgmttest/__init__.py'
  
  clean distclean:
  	rm -f *.pyc
@@ -129,22 +129,22 @@ index 7dea0a4e02..04b8c68d65 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/operations'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/operations'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib/operations'
  
  install: installdirs
  	for file in $(PROGRAMS); do \
 -		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python/gppylib/operations/'$$file ; \
-+		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/operations/'$$file ; \
++		$(INSTALL_SCRIPT) $$file '$(DESTDIR)$(libdir)/python3.9/gppylib/operations/'$$file ; \
  	done
  	for file in $(DATA); do \
 -		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/operations/'$$file ; \
-+		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/operations/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.9/gppylib/operations/'$$file ; \
  	done
  
  uninstall:
  	for file in $(PROGRAMS) $(DATA); do \
 -		rm -f '$(DESTDIR)$(libdir)/python/gppylib/operations/'$$file ; \
-+		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/operations/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/operations/'$$file ; \
  	done
  
  clean distclean:
@@ -157,26 +157,26 @@ index 6f8e74e160..b124234f85 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/programs'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/programs'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib/programs'
  
  install: installdirs
  	for file in $(DATA); do \
 -		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/programs/'$$file ; \
-+		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.9/gppylib/programs/'$$file ; \
  	done
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsAddMirrors.py'
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsRecoverSegment.py'
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsRecoverSegment_triples.py'
 -	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python/gppylib/programs/clsSystemState.py'
-+	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsAddMirrors.py'
-+	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsRecoverSegment.py'
-+	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsRecoverSegment_triples.py'
-+	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/clsSystemState.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.9/gppylib/programs/clsAddMirrors.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.9/gppylib/programs/clsRecoverSegment.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.9/gppylib/programs/clsRecoverSegment_triples.py'
++	$(PERL) $(top_builddir)/putversion '$(DESTDIR)$(libdir)/python3.9/gppylib/programs/clsSystemState.py'
  
  uninstall:
  	for file in $(PROGRAMS) $(DATA); do \
 -		rm -f '$(DESTDIR)$(libdir)/python/gppylib/programs/'$$file ; \
-+		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/programs/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/programs/'$$file ; \
  	done
  
  clean distclean:
@@ -189,20 +189,20 @@ index 227fc779b2..292104b589 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/system'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/system'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib/system'
  
  install: installdirs
 -	$(INSTALL_SCRIPT) ComputeCatalogUpdate.py '$(DESTDIR)$(libdir)/python/gppylib/system/ComputeCatalogUpdate.py'
-+	$(INSTALL_SCRIPT) ComputeCatalogUpdate.py '$(DESTDIR)$(libdir)/python3.6/gppylib/system/ComputeCatalogUpdate.py'
++	$(INSTALL_SCRIPT) ComputeCatalogUpdate.py '$(DESTDIR)$(libdir)/python3.9/gppylib/system/ComputeCatalogUpdate.py'
  	for file in $(DATA); do \
 -		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python/gppylib/system/'$$file ; \
-+		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.6/gppylib/system/'$$file ; \
++		$(INSTALL_DATA) $$file '$(DESTDIR)$(libdir)/python3.9/gppylib/system/'$$file ; \
  	done
  
  uninstall:
  	for file in ComputeCatalogUpdate.py $(DATA); do \
 -		rm -f '$(DESTDIR)$(libdir)/python/gppylib/system/'$$file ; \
-+		rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/system/'$$file ; \
++		rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/system/'$$file ; \
  	done
  
  clean distclean:
@@ -215,23 +215,23 @@ index a73c17bba2..6e6eada697 100644
  
  installdirs:
 -	$(MKDIR_P) '$(DESTDIR)$(libdir)/python/gppylib/util'
-+	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.6/gppylib/util'
++	$(MKDIR_P) '$(DESTDIR)$(libdir)/python3.9/gppylib/util'
  
  install: installdirs
 -	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python/gppylib/util/__init__.py'
 -	$(INSTALL_DATA) gp_utils.py '$(DESTDIR)$(libdir)/python/gppylib/util/gp_utils.py'
 -	$(INSTALL_DATA) ssh_utils.py '$(DESTDIR)$(libdir)/python/gppylib/util/ssh_utils.py'
-+	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python3.6/gppylib/util/__init__.py'
-+	$(INSTALL_DATA) gp_utils.py '$(DESTDIR)$(libdir)/python3.6/gppylib/util/gp_utils.py'
-+	$(INSTALL_DATA) ssh_utils.py '$(DESTDIR)$(libdir)/python3.6/gppylib/util/ssh_utils.py'
++	$(INSTALL_DATA) __init__.py '$(DESTDIR)$(libdir)/python3.9/gppylib/util/__init__.py'
++	$(INSTALL_DATA) gp_utils.py '$(DESTDIR)$(libdir)/python3.9/gppylib/util/gp_utils.py'
++	$(INSTALL_DATA) ssh_utils.py '$(DESTDIR)$(libdir)/python3.9/gppylib/util/ssh_utils.py'
  
  uninstall:
 -	rm -f '$(DESTDIR)$(libdir)/python/gppylib/util/__init__.py'
 -	rm -f '$(DESTDIR)$(libdir)/python/gppylib/util/gp_utils.py'
 -	rm -f '$(DESTDIR)$(libdir)/python/gppylib/util/ssh_utils.py'
-+	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/util/__init__.py'
-+	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/util/gp_utils.py'
-+	rm -f '$(DESTDIR)$(libdir)/python3.6/gppylib/util/ssh_utils.py'
++	rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/util/__init__.py'
++	rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/util/gp_utils.py'
++	rm -f '$(DESTDIR)$(libdir)/python3.9/gppylib/util/ssh_utils.py'
  
  clean distclean:
  	rm -f *.pyc
