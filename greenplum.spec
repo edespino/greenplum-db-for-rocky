@@ -1,7 +1,7 @@
 ## -------------------------------------------------------------------
-## This is the Greenplum Database RPM spec file.
-## This spec file and ancillary files are licensed in accordance with
-## The Apache 2 License.
+## This is the Greenplum Database (GPDB) RPM spec file.  This spec
+## file and GPDB ancillary files are licensed in accordance with The
+## Apache 2 License. Other files adhere to their respective licenses.
 ## -------------------------------------------------------------------
 
 %{!?debug:%global debug 1}
@@ -33,6 +33,10 @@
 
 %global pygresqlversion 5.2.4
 
+%if 0%{?rhel} >= 9
+%global _lto_cflags %{nil}
+%endif
+
 ## -------------------------------------------------------------------
 
 Summary: Greenplum Database Server
@@ -54,6 +58,7 @@ Source2: gp.limits.conf
 Patch1: gppylib-install.patch
 Patch2: gp_bash_functions.patch
 Patch3: mangling-shebang.patch
+Patch4: SparseData.patch
 
 ## -------------------------------------------------------------------
 
@@ -106,6 +111,7 @@ BuildRequires: pam-devel
 BuildRequires: perl(ExtUtils::Embed), perl-devel
 %if 0%{?rhel} >= 9
 BuildRequires: perl-FindBin
+BuildRequires: perl-Opcode
 %endif
 BuildRequires: python3-devel
 
@@ -189,12 +195,19 @@ performance on large data volumes.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 ## -------------------------------------------------------------------
 ## BUILD section
 ## -------------------------------------------------------------------
 
 %build
+
+## -------------------------------------------------------------------
+## Configure, Build, and Install GPDB section
+## -------------------------------------------------------------------
+
+cd ..; cd gpdb_src
 
 export PYTHON=%{python3}
 
@@ -304,29 +317,20 @@ common_configure_options='
         %endif
 '
 
-## -------------------------------------------------------------------
-## CONFIGURE section
-## -------------------------------------------------------------------
-
 %configure $common_configure_options
 
-## -------------------------------------------------------------------
-## MAKE_BUILD section
-## -------------------------------------------------------------------
-
 %make_build
-
-## -------------------------------------------------------------------
-## INSTALL section
-## -------------------------------------------------------------------
 
 %install
 
 # Install GPDB
 make install DESTDIR=$RPM_BUILD_ROOT
 
+## -------------------------------------------------------------------
+## BUILD PyGreSQL section
+## -------------------------------------------------------------------
+
 # Build and Install PyGreSQL
-cd ..; cd PyGreSQL-%{pygresqlversion}
 
 PATH=$RPM_BUILD_ROOT/usr/bin:$PATH \
 %{python3} setup.py build

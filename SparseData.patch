@@ -1,0 +1,13 @@
+diff --git a/gpcontrib/gp_sparse_vector/SparseData.h b/gpcontrib/gp_sparse_vector/SparseData.h
+index d430ce7795..c296d24290 100644
+--- a/gpcontrib/gp_sparse_vector/SparseData.h
++++ b/gpcontrib/gp_sparse_vector/SparseData.h
+@@ -252,7 +252,7 @@ static inline int64 compword_to_int8(const char *entry)
+ 	char *numptr2 = (char *)(&num_2);
+ 	int32_t num_4;
+ 	char *numptr4 = (char *)(&num_4);
+-	int64 num;
++	int64 num = 0;
+ 	char *numptr8 = (char *)(&num);
+ 
+ 	switch(size) {
