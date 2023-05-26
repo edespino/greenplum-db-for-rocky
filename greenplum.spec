@@ -383,7 +383,11 @@ getent passwd gpadmin >/dev/null || /usr/sbin/useradd \
 %{python3_sitearch}/__pycache__/pg.cpython-%{python3_version_nodots}.pyc
 %{python3_sitearch}/__pycache__/pgdb.cpython-%{python3_version_nodots}.opt-1.pyc
 %{python3_sitearch}/__pycache__/pgdb.cpython-%{python3_version_nodots}.pyc
+%if 0%{?rhel} >= 9
+%{python3_sitearch}/_pg.cpython-%{python3_version_nodots}-x86_64-linux-gnu.so
+%else
 %{python3_sitearch}/_pg.cpython-%{python3_version_nodots}m-x86_64-linux-gnu.so
+%endif
 %{python3_sitearch}/pg.py
 %{python3_sitearch}/pgdb.py
 %{_libexecdir}/ifaddrs
