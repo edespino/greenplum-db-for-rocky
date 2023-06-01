@@ -31,8 +31,6 @@
 
 %global betamajorversion beta.3
 
-%global pygresqlversion 5.2.4
-
 ## -------------------------------------------------------------------
 
 Summary: Greenplum Database Server
@@ -49,7 +47,6 @@ Url: https://github.com/greenplum-db/gpdb
 ## -------------------------------------------------------------------
 
 Source0: https://github.com/greenplum-db/gpdb/releases/download/%{version}-%{betamajorversion}/%{version}-%{betamajorversion}-src-full.tar.gz
-Source1: https://github.com/PyGreSQL/PyGreSQL/releases/download/%{pygresqlversion}/PyGreSQL-%{pygresqlversion}.tar.gz
 Source2: gp.limits.conf
 Patch1: gppylib-install.patch
 Patch2: gp_bash_functions.patch
@@ -110,7 +107,7 @@ BuildRequires: perl(ExtUtils::Embed), perl-devel
 BuildRequires: perl-FindBin
 BuildRequires: perl-Opcode
 %endif
-BuildRequires: python3-devel
+BuildRequires: python3-devel >= 3.9
 
 Requires: apr
 Requires: bash
@@ -187,7 +184,6 @@ performance on large data volumes.
 
 %prep
 
-%setup -q -b 1 -n PyGreSQL-%{pygresqlversion}
 %setup -q -b 0 -n gpdb_src
 %patch1 -p1
 %patch2 -p1
@@ -325,16 +321,8 @@ common_configure_options='
 make install DESTDIR=$RPM_BUILD_ROOT
 
 ## -------------------------------------------------------------------
-## BUILD PyGreSQL section
+## Strip debug info
 ## -------------------------------------------------------------------
-
-cd ..; cd PyGreSQL-%{pygresqlversion}
-
-PATH=$RPM_BUILD_ROOT/usr/bin:$PATH \
-%{python3} setup.py build
-
-PATH=$RPM_BUILD_ROOT/usr/bin:$PATH \
-%{python3} setup.py install --skip-build --root $RPM_BUILD_ROOT
 
 find "$RPM_BUILD_ROOT/usr/lib64/python%{python3_version}/site-packages" \
      -type f \
@@ -343,7 +331,10 @@ find "$RPM_BUILD_ROOT/usr/lib64/python%{python3_version}/site-packages" \
         strip --strip-debug "$so_file"
     done
 
-# Install /etc config file(s)
+## -------------------------------------------------------------------
+## Install /etc config file(s)
+## -------------------------------------------------------------------
+
 install -d $RPM_BUILD_ROOT/etc/security/limits.d
 install -m 644 %{SOURCE2} $RPM_BUILD_ROOT/etc/security/limits.d
 
@@ -378,7 +369,6 @@ getent passwd gpadmin >/dev/null || /usr/sbin/useradd \
 %{_prefix}/%{_lib}/pkgconfig/*
 %{_prefix}/%{_lib}/postgresql
 %{python3_sitearch}/../gppylib
-%{python3_sitearch}/PyGreSQL-%{pygresqlversion}-py%{python3_version}.egg-info
 %{python3_sitearch}/__pycache__/pg.cpython-%{python3_version_nodots}.opt-1.pyc
 %{python3_sitearch}/__pycache__/pg.cpython-%{python3_version_nodots}.pyc
 %{python3_sitearch}/__pycache__/pgdb.cpython-%{python3_version_nodots}.opt-1.pyc
